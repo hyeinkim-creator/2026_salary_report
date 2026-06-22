@@ -479,6 +479,18 @@
    - 브레이크포인트: 767px (모바일)
 ============================================================ */
 
+/* 임베드 iframe 내부 스크롤바 숨김 (스크롤/겹침 기능은 그대로 유지) */
+html, body {
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* 구형 Edge/IE */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none;                /* Chrome·Safari·신형 Edge */
+}
+
 .reportContainer {
     --color-bk: #000000;
     --color-bl: #14191E;
