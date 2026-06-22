@@ -1111,13 +1111,17 @@ html:not(.js) .kvPoint,
     .howtoTitle {font-size: 32px; line-height: 1.4; letter-spacing: -0.48px; margin-bottom: 40px;}
     .cardList {gap: 20px; padding-top: 40px;}
     .reportCard {
-        position: static;          /* 모바일은 겹침(sticky) 끄고 일반 배치 (카드가 뷰포트보다 큼 + Figma도 일반 배치) */
+        position: sticky;          /* 모바일도 웹처럼 겹침(sticky) 적용 */
         flex-direction: column;
         gap: 30px;
         padding: 20px;
         border-radius: 20px;
     }
-    .cardStackSpacer {display: none;}   /* 겹침을 안 쓰므로 스택 여백 제거 */
+    /* 모바일 스택 오프셋: 앞 카드 top보다 20px씩 아래로 쌓임 */
+    .reportCard:nth-child(1) {top: 16px;}
+    .reportCard:nth-child(2) {top: 36px;}
+    .reportCard:nth-child(3) {top: 56px;}
+    .cardStackSpacer {display: block; height: 160px;}   /* 마지막 카드 고정 유지용 여백 복원 */
     .cardText {gap: 20px; padding: 0;}
     .cardTitle {font-size: 20px; letter-spacing: -0.2px;}
     .cardTitle_b {font-size: 20px; letter-spacing: -0.2px;}
