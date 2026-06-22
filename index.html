@@ -339,8 +339,18 @@
     var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-                entry.target.classList.add('is-revealed');
-                observer.unobserve(entry.target);
+                var el = entry.target;
+                el.classList.add('is-revealed');
+                observer.unobserve(el);
+                /* 등장 애니메이션이 끝나면 will-change·잔여 transform 정리.
+                   → 합성 레이어/스태킹 컨텍스트를 없애 sticky 카드와
+                     뒤 섹션(reportNotice) 경계의 덜컹거림 제거. */
+                el.addEventListener('transitionend', function onEnd(ev) {
+                    if (ev.propertyName !== 'transform') return;
+                    el.style.willChange = 'auto';
+                    el.style.setProperty('transform', 'none', 'important');
+                    el.removeEventListener('transitionend', onEnd);
+                });
             }
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
