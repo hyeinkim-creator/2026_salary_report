@@ -886,6 +886,7 @@ html:not(.js) .kvPoint,
 }
 .reportCard {
     position: sticky;
+    z-index: 2;          /* 노티스(z-index:1)보다 위에 그려져 카드가 가려지지 않도록 */
     display: flex;
     gap: 40px;
     align-items: stretch;
