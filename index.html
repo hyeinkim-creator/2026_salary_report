@@ -481,13 +481,19 @@
    - 브레이크포인트: 767px (모바일)
 ============================================================ */
 
-/* 임베드 iframe 내부 스크롤바 숨김 (스크롤/겹침 기능은 그대로 유지) */
+/* 임베드 iframe 내부 스크롤바 숨김 (스크롤/겹침 기능은 그대로 유지)
+   - 바(bar)의 '표시'만 끄므로 스크롤 동작과 .reportCard sticky 겹침은 그대로 유지
+   - 주의: html/body 등 sticky 조상에 overflow(hidden/auto/scroll)를 주면
+           sticky가 깨지므로, 가로 스크롤 차단은 .reportContainer(overflow-x: clip)에 맡긴다 */
 html, body {
     scrollbar-width: none;        /* Firefox */
     -ms-overflow-style: none;     /* 구형 Edge/IE */
 }
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+/* 실제 스크롤 컨테이너가 html/body 가 아닌 다른 래퍼여도 내부 바를 숨기도록 전체 대상 */
+* {
+    scrollbar-width: none;        /* Firefox */
+}
+*::-webkit-scrollbar {
     width: 0 !important;
     height: 0 !important;
     display: none;                /* Chrome·Safari·신형 Edge */
